@@ -1,0 +1,20 @@
+# Full-Stack Development Configuration Templates
+
+This directory contains templates and configuration files for full-stack development projects:
+
+## Frontend Templates
+- `frontend_component_template.jsx` - Standard React component structure with error boundaries and loading states
+- `project_structure_template.txt` - Recommended project structure for frontend applications
+
+## Backend Templates
+- `backend_api_template.js` - Express.js API route template with validation and authentication
+- `database_model_template.js` - Mongoose/MongoDB model template with security best practices
+
+## Infrastructure Templates
+- `docker_compose_template.yml` - Docker Compose configuration for full-stack applications
+- `project_structure_template.txt` - Complete project structure including backend, frontend, and deployment
+
+## Utility Scripts
+- `fullstack_helper.py` - Python script for common full-stack development tasks (setup, testing, linting, etc.)
+
+These templates follow industry best practices and can be customized for specific project requirements.

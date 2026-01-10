@@ -1,0 +1,29 @@
+# React.js Latest Asset Templates
+
+This directory contains templates and configuration files for React.js development:
+
+## Component Templates
+- `functional-component.jsx` - Basic functional component with hooks
+- `custom-hook.js` - Template for custom hooks
+- `error-boundary.jsx` - Error boundary component
+- `lazy-component.jsx` - Lazy loaded component with Suspense
+- `context-provider.jsx` - Context provider component
+
+## Project Templates
+- `vite-react-app/` - Vite + React project template
+- `nextjs-app/` - Next.js application template
+- `react-router-setup/` - React Router configuration
+- `redux-toolkit-setup/` - Redux Toolkit store setup
+- `testing-setup/` - Testing configuration files
+
+## Configuration Templates
+- `vite.config.js` - Vite configuration for React
+- `package.json` - React project dependencies
+- `tsconfig.json` - TypeScript configuration for React
+- `eslint.config.js` - ESLint configuration for React projects
+- `jest.config.js` - Jest configuration for React testing
+
+## Utility Scripts
+- `react_helper.py` - Python script for React development tasks
+
+These templates follow React best practices and can be customized for specific project requirements.

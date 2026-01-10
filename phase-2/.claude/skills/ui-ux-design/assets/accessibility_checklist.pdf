@@ -1,0 +1,158 @@
+# Accessibility Audit Checklist
+
+## Visual Design
+
+### Color and Contrast
+- [ ] All text has minimum 4.5:1 contrast ratio (WCAG AA)
+- [ ] Large text (18pt+) has minimum 3:1 contrast ratio
+- [ ] Color is not the only means of conveying information
+- [ ] Passes color blindness simulation tests
+- [ ] Sufficient contrast for UI components (buttons, form fields)
+
+### Typography
+- [ ] Text is resizable up to 200% without loss of content
+- [ ] Text reflows without horizontal scrolling at 320px width
+- [ ] No text justified (left or right only)
+- [ ] Sufficient spacing between lines and paragraphs
+
+## Keyboard Navigation
+
+### Focus Management
+- [ ] All interactive elements are keyboard accessible
+- [ ] Focus order follows logical sequence
+- [ ] Focus indicators are visible and clear
+- [ ] No keyboard traps exist
+- [ ] Skip links are provided for main content
+
+### Keyboard Interactions
+- [ ] All functionality is operable via keyboard
+- [ ] Standard keyboard shortcuts are followed
+- [ ] Custom keyboard interactions are documented
+- [ ] Modal dialogs trap focus while open
+- [ ] Focus returns to appropriate location after actions
+
+## Screen Reader Compatibility
+
+### Semantic HTML
+- [ ] Proper heading hierarchy (h1, h2, h3, etc.) is maintained
+- [ ] Headings describe section content accurately
+- [ ] Lists use proper list elements (ul, ol, dl)
+- [ ] Tables use proper structure (th, scope, caption)
+- [ ] Landmarks are used appropriately (nav, main, aside, etc.)
+
+### Alternative Text
+- [ ] All informative images have descriptive alt text
+- [ ] Decorative images have empty alt text (alt="")
+- [ ] Complex images have detailed descriptions
+- [ ] Images of text have alt text matching the text
+- [ ] CAPTCHA images have non-visual alternatives
+
+### ARIA Implementation
+- [ ] ARIA labels are used when semantic HTML is insufficient
+- [ ] ARIA landmarks are used to improve navigation
+- [ ] Live regions are used for dynamic content updates
+- [ ] ARIA roles are used appropriately and correctly
+- [ ] ARIA attributes have proper values and relationships
+
+## Forms and Input
+
+### Labels and Instructions
+- [ ] All form fields have associated labels
+- [ ] Labels are descriptive and clear
+- [ ] Instructions are provided for complex inputs
+- [ ] Error messages are clear and descriptive
+- [ ] Required fields are clearly identified
+
+### Error Handling
+- [ ] Error messages identify the problem clearly
+- [ ] Error messages suggest how to fix the problem
+- [ ] Error notifications are programmatically determinable
+- [ ] Focus moves to first error after submission
+- [ ] Data is preserved when errors occur
+
+## Media and Content
+
+### Audio and Video
+- [ ] Audio content has transcripts available
+- [ ] Video content has captions
+- [ ] Audio does not autoplay or has controls
+- [ ] Video content has audio description if needed
+- [ ] Media players have keyboard controls
+
+### Links and Navigation
+- [ ] Link text describes the destination or action
+- [ ] Link purpose is clear from context or programmatically determinable
+- [ ] Sufficient space between links for touch/mouse users
+- [ ] Navigation is consistent across pages
+- [ ] Breadcrumb navigation is provided for multi-level sites
+
+## Mobile and Touch
+
+### Touch Targets
+- [ ] All touch targets are at least 44px by 44px
+- [ ] Adequate spacing between touch targets
+- [ ] Touch targets are not clustered
+- [ ] Touch gestures have mouse alternatives
+- [ ] Touch actions can be canceled when appropriate
+
+### Orientation and Zoom
+- [ ] Content is usable in both portrait and landscape
+- [ ] Horizontal scrolling is not required at 320px width
+- [ ] Text scales appropriately up to 200%
+- [ ] Viewport is not locked to prevent zooming
+- [ ] Content is not cut off when zoomed
+
+## Testing and Validation
+
+### Automated Testing
+- [ ] Run accessibility testing tools (axe, WAVE, etc.)
+- [ ] Validate HTML markup
+- [ ] Check color contrast ratios
+- [ ] Test with automated accessibility checkers
+- [ ] Review results and fix identified issues
+
+### Manual Testing
+- [ ] Test with keyboard only
+- [ ] Test with screen reader (NVDA, JAWS, VoiceOver)
+- [ ] Test with reduced motion settings
+- [ ] Test with high contrast mode
+- [ ] Test with different browsers and devices
+
+### User Testing
+- [ ] Include users with disabilities in testing
+- [ ] Test with assistive technology users
+- [ ] Gather feedback on accessibility features
+- [ ] Validate that accessibility features work as intended
+- [ ] Document any user feedback or issues
+
+## Platform Specific
+
+### Web Applications
+- [ ] ARIA attributes are used appropriately for dynamic content
+- [ ] Focus management is handled for single-page applications
+- [ ] Dynamic content updates are announced to screen readers
+- [ ] Modal dialogs are properly implemented
+- [ ] Custom controls have proper keyboard support
+
+### Mobile Applications
+- [ ] VoiceOver/TalkBack compatibility is tested
+- [ ] Dynamic Type/Sizes are supported where applicable
+- [ ] Touch target sizes meet minimum requirements
+- [ ] Appropriate accessibility attributes are implemented
+- [ ] Platform accessibility guidelines are followed
+
+## Documentation
+
+### Accessibility Statement
+- [ ] Accessibility statement is available and up-to-date
+- [ ] Known limitations are documented
+- [ ] Contact information for accessibility feedback is provided
+- [ ] Commitment to accessibility is stated
+- [ ] Testing methods and results are documented
+
+### Development Guidelines
+- [ ] Accessibility requirements are documented
+- [ ] Development team is trained on accessibility
+- [ ] Accessibility is included in design process
+- [ ] Testing procedures include accessibility checks
+- [ ] Remediation processes are established

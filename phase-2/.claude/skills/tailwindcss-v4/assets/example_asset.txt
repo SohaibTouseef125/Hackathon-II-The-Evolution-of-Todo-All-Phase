@@ -1,0 +1,23 @@
+# Tailwind CSS v4 Asset Templates
+
+This directory contains templates and configuration files for Tailwind CSS v4 development:
+
+## Configuration Templates
+- `tailwind.config.js` - Complete Tailwind configuration template with v4 features
+- `postcss.config.js` - PostCSS configuration for Tailwind integration
+- `package.json` - Package configuration with Tailwind dependencies
+
+## Component Templates
+- `button-component.html` - Reusable button component with variants
+- `card-component.html` - Card component with responsive design
+- `form-components.html` - Form elements with styling
+- `navigation-component.html` - Responsive navigation component
+
+## Project Templates
+- `index.html` - Basic HTML template with Tailwind integration
+- `starter-template/` - Complete project starter with Tailwind v4
+
+## Utility Scripts
+- `tailwind_helper.py` - Python script for common Tailwind development tasks
+
+These templates follow Tailwind CSS v4 best practices and can be customized for specific project requirements.

@@ -1,0 +1,108 @@
+# Full-Stack Project Structure Template
+
+## Frontend Structure
+```
+frontend/
+├── public/
+│   ├── index.html
+│   ├── favicon.ico
+│   └── manifest.json
+├── src/
+│   ├── components/
+│   │   ├── common/          # Reusable UI components
+│   │   ├── layout/          # Layout components (Header, Sidebar, etc.)
+│   │   └── feature/         # Feature-specific components
+│   ├── containers/          # Connected components with state
+│   ├── hooks/               # Custom React hooks
+│   ├── services/            # API service functions
+│   ├── store/               # State management (Redux, Zustand, etc.)
+│   ├── utils/               # Utility functions
+│   ├── types/               # TypeScript type definitions
+│   ├── styles/              # Global styles and CSS modules
+│   ├── assets/              # Images, icons, and other static assets
+│   ├── routes/              # Route definitions
+│   └── App.js
+├── package.json
+├── .env
+├── .gitignore
+└── README.md
+```
+
+## Backend Structure
+```
+backend/
+├── src/
+│   ├── controllers/         # Request handlers
+│   ├── models/              # Database models
+│   ├── routes/              # API route definitions
+│   ├── middleware/          # Custom middleware
+│   ├── services/            # Business logic
+│   ├── utils/               # Utility functions
+│   ├── config/              # Configuration files
+│   ├── validations/         # Request validation schemas
+│   └── app.js               # Main application file
+├── tests/
+│   ├── unit/                # Unit tests
+│   ├── integration/         # Integration tests
+│   └── fixtures/            # Test data
+├── package.json
+├── .env
+├── .gitignore
+├── Dockerfile
+└── README.md
+```
+
+## Database Structure
+```
+database/
+├── migrations/
+│   ├── 001_create_users.sql
+│   ├── 002_create_posts.sql
+│   └── ...
+├── seeds/
+│   ├── users.sql
+│   └── posts.sql
+├── schema.sql
+└── README.md
+```
+
+## Deployment Structure
+```
+deployment/
+├── docker-compose.yml
+├── nginx.conf
+├── kubernetes/
+│   ├── deployment.yaml
+│   ├── service.yaml
+│   └── ingress.yaml
+├── terraform/
+│   ├── main.tf
+│   ├── variables.tf
+│   └── outputs.tf
+└── scripts/
+    ├── deploy.sh
+    ├── rollback.sh
+    └── health-check.sh
+```
+
+## Testing Structure
+```
+tests/
+├── unit/
+│   ├── components/
+│   ├── services/
+│   └── utils/
+├── integration/
+│   ├── api/
+│   ├── database/
+│   └── auth/
+├── e2e/
+│   ├── specs/
+│   └── page-objects/
+├── fixtures/
+│   ├── users.json
+│   └── posts.json
+├── mocks/
+│   └── external-apis/
+└── coverage/
+```
