@@ -4,20 +4,10 @@ from typing import List
 from datetime import datetime
 import uuid
 
-# Adjust imports for running from backend directory
-try:
-    from ..models import Task, TaskCreate, TaskRead, TaskUpdate, User
-    from ..db import get_session
-    from ..auth import get_current_user
-    from ..services.task_service import TaskService
-except (ImportError, ValueError):
-    import sys
-    import os
-    sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-    from models import Task, TaskCreate, TaskRead, TaskUpdate, User
-    from db import get_session
-    from auth import get_current_user
-    from services.task_service import TaskService
+from models import Task, TaskCreate, TaskRead, TaskUpdate, User
+from db import get_session
+from auth import get_current_user
+from services.task_service import TaskService
 
 from fastapi.security import HTTPAuthorizationCredentials
 

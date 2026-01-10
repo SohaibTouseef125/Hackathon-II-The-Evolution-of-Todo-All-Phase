@@ -3,14 +3,7 @@ from typing import List, Optional
 from datetime import datetime
 import uuid
 
-# Adjust imports for running from backend directory
-try:
-    from ..models import Task, TaskCreate, TaskUpdate, User
-except (ImportError, ValueError):
-    import sys
-    import os
-    sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-    from models import Task, TaskCreate, TaskUpdate, User
+from models import Task, TaskCreate, TaskUpdate, User
 
 
 class TaskService:

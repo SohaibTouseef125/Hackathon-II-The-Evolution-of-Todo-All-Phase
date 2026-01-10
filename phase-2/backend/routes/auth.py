@@ -4,20 +4,10 @@ from sqlmodel import Session
 from typing import Optional
 from datetime import timedelta
 
-# Adjust imports for running from backend directory
-try:
-    from ..auth import create_access_token  # Import from main auth module
-    from ..models import UserCreate, UserRead, User
-    from ..db import get_session
-    from ..services.user_service import UserService
-except (ImportError, ValueError):
-    import sys
-    import os
-    sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-    from auth import create_access_token
-    from models import UserCreate, UserRead, User
-    from db import get_session
-    from services.user_service import UserService
+from auth import create_access_token
+from models import UserCreate, UserRead, User
+from db import get_session
+from services.user_service import UserService
 
 router = APIRouter()
 

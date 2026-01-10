@@ -4,14 +4,7 @@ from datetime import datetime
 import uuid
 from passlib.context import CryptContext
 
-# Adjust imports for running from backend directory
-try:
-    from ..models import User, UserCreate, UserUpdate
-except (ImportError, ValueError):
-    import sys
-    import os
-    sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-    from models import User, UserCreate, UserUpdate
+from models import User, UserCreate, UserUpdate
 
 
 # Password hashing context

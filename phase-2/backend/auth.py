@@ -4,16 +4,12 @@ from jose import JWTError, jwt
 from datetime import datetime, timedelta
 from typing import Optional
 import uuid
-from models import UserRead, User
 from sqlmodel import Session, select
 import os
 from dotenv import load_dotenv
 
-# Import db module to get session
-try:
-    from .db import get_session
-except ImportError:
-    from db import get_session
+from models import UserRead, User
+from db import get_session
 
 # Load environment variables
 load_dotenv()

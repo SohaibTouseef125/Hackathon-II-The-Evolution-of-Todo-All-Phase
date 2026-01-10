@@ -1,8 +1,8 @@
 fastapi
 uvicorn[standard]
 sqlmodel
-SQLAlchemy>
-alembic>
+SQLAlchemy
+alembic
 psycopg2-binary
 python-jose[cryptography]
 passlib[bcrypt]
@@ -10,4 +10,3 @@ python-multipart
 python-dotenv
 pydantic
 bcrypt
-
