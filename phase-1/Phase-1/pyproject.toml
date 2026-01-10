@@ -1,0 +1,42 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "todo-extended"
+version = "0.2.0"
+description = "Phase 1 Extended Todo Console Application - Priorities, Tags, Search, Filter, Sort, Recurring Tasks, Reminders"
+readme = "README.md"
+requires-python = ">=3.13"
+authors = [{name = "Developer", email = "dev@example.com"}]
+license = {text = "MIT"}
+classifiers = [
+    "Programming Language :: Python :: 3.13",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "rich>=13.0.0",
+]
+
+[project.scripts]
+todo = "src.main:main"
+
+[project.urls]
+Homepage = "https://github.com/username/todo-app"
+Repository = "https://github.com/username/todo-app"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+
+[tool.uv]
+dev-dependencies = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+]
