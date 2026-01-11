@@ -11,7 +11,7 @@ app = FastAPI(title="Todo API Phase-2", version="1.0.0")
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://hackathon-ii-the-evolution-git-36d2ee-sohaib-touseefs-projects.vercel.app/","http://localhost:3000/"],  # In production, replace with specific origins
+    allow_origins=["https://hackathon-ii-the-evolution-of-todo-tan.vercel.app/","https://hackathon-ii-the-evolution-of-todo-all-phase-rjdw1zvb9.vercel.app/",""],  # In production, replace with specific origins
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
