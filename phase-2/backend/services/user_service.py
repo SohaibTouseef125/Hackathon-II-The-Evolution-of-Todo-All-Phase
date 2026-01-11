@@ -9,6 +9,8 @@ from models import User, UserCreate, UserUpdate
 
 
 # Password hashing context
+# Explicitly using bcrypt as the scheme.
+# passlib on Python 3.13+ can have issues with auto-detecting bcrypt versions.
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
@@ -16,13 +18,23 @@ class UserService:
     @staticmethod
     def _normalize_password(password: str) -> str:
         """Normalize password using SHA-256 to handle any length password safely."""
+        # This converts any password into a 64-character hexadecimal string,
+        # ensuring it always stays under the 72-byte bcrypt limit.
         return hashlib.sha256(password.encode("utf-8")).hexdigest()
 
     @staticmethod
     def verify_password(plain_password: str, hashed_password: str) -> bool:
         """Verify a plain password against a hashed password"""
         normalized = UserService._normalize_password(plain_password)
-        return pwd_context.verify(normalized, hashed_password)
+        try:
+            return pwd_context.verify(normalized, hashed_password)
+        except Exception:
+            # Fallback for old passwords if any exist without normalization (for migration safety)
+            # In a clean project, this isn't strictly necessary but good for stability.
+            try:
+                return pwd_context.verify(plain_password[:72], hashed_password)
+            except Exception:
+                return False
 
     @staticmethod
     def get_password_hash(password: str) -> str:
