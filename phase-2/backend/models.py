@@ -8,6 +8,9 @@ class UserBase(SQLModel):
     email: str = Field(unique=True, index=True)
     name: Optional[str] = Field(default=None, max_length=100)
 
+    class Config:
+        protected_namespaces = ()
+
 
 class User(UserBase, table=True):
     id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
@@ -20,7 +23,8 @@ class User(UserBase, table=True):
 
 
 class UserCreate(UserBase):
-    password: str
+    email: str
+    password: str = Field(min_length=8, max_length=64)
 
 
 class UserRead(UserBase):
@@ -38,6 +42,9 @@ class TaskBase(SQLModel):
     title: str = Field(min_length=1, max_length=200)
     description: Optional[str] = Field(default=None, max_length=1000)
     completed: bool = False
+
+    class Config:
+        protected_namespaces = ()
 
 
 class Task(TaskBase, table=True):

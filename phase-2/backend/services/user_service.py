@@ -25,7 +25,11 @@ class UserService:
         """Hash a password, truncating to 72 characters if needed for bcrypt compatibility"""
         # Bcrypt has a maximum password length of 72 bytes/characters
         # Truncate the password to 72 characters if it's longer
-        return pwd_context.hash(password[:72])
+        safe_password = password.encode("utf-8")[:72]
+        return pwd_context.hash(safe_password)
+        
+    
+
 
     @staticmethod
     def get_user_by_email(session: Session, email: str) -> Optional[User]:
