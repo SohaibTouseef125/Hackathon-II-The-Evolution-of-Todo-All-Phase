@@ -24,7 +24,7 @@ class User(UserBase, table=True):
 
 class UserCreate(UserBase):
     email: str
-    password: str = Field(min_length=8, max_length=64)
+    password: str = Field(min_length=8)  # No max_length - handled by SHA-256 normalization
 
 
 class UserRead(UserBase):
