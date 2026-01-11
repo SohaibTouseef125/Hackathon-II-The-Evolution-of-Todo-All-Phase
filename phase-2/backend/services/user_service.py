@@ -2,6 +2,7 @@ from sqlmodel import Session, select
 from typing import Optional
 from datetime import datetime
 import uuid
+import hashlib
 from passlib.context import CryptContext
 
 from models import User, UserCreate, UserUpdate
@@ -13,23 +14,21 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 class UserService:
     @staticmethod
+    def _normalize_password(password: str) -> str:
+        """Normalize password using SHA-256 to handle any length password safely."""
+        return hashlib.sha256(password.encode("utf-8")).hexdigest()
+
+    @staticmethod
     def verify_password(plain_password: str, hashed_password: str) -> bool:
         """Verify a plain password against a hashed password"""
-        # Truncate password to 72 characters for bcrypt compatibility
-        if len(plain_password) > 72:
-            plain_password = plain_password[:72]
-        return pwd_context.verify(plain_password, hashed_password)
+        normalized = UserService._normalize_password(plain_password)
+        return pwd_context.verify(normalized, hashed_password)
 
     @staticmethod
     def get_password_hash(password: str) -> str:
-        """Hash a password, truncating to 72 characters if needed for bcrypt compatibility"""
-        # Bcrypt has a maximum password length of 72 bytes/characters
-        # Truncate the password to 72 characters if it's longer
-        safe_password = password.encode("utf-8")[:72]
-        return pwd_context.hash(safe_password)
-        
-    
-
+        """Hash a password using SHA-256 normalization followed by bcrypt"""
+        normalized = UserService._normalize_password(password)
+        return pwd_context.hash(normalized)
 
     @staticmethod
     def get_user_by_email(session: Session, email: str) -> Optional[User]:
