@@ -6,7 +6,7 @@ alembic
 psycopg2-binary
 python-jose[cryptography]
 passlib
-bcrypt==4.2.0
+bcrypt
 python-multipart
 python-dotenv
 pydantic
@@ -14,6 +14,5 @@ openai
 mcp
 fastmcp
 google-generativeai
-
 # Pin httpx for Starlette TestClient compatibility (Starlette 0.27 expects httpx<0.28)
-httpx<0.28
+httpx<
