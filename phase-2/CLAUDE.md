@@ -249,7 +249,7 @@ Agents are specialized AI assistants designed for specific tasks. They can be in
 
 Skills are reusable capabilities that can be automatically invoked when Claude detects relevant requests. Each skill has specific functionality:
 
-- **nextjs-app-router**: Build modern Next.js 15+ applications using App Router with server components, client components, layouts, and routing.
+- **nextjs-app-router**: Build modern Next.js 16+ applications using App Router with server components, client components, layouts, and routing.
 - **fastapi-rest-api**: Build RESTful APIs with FastAPI including CRUD endpoints, request/response models, error handling, and CORS.
 - **sqlmodel-orm**: Use SQLModel for database operations combining SQLAlchemy and Pydantic. Define models, relationships, queries, and migrations.
 - **neon-serverless-database**: Work with Neon Serverless PostgreSQL including connection setup, queries, and serverless features.

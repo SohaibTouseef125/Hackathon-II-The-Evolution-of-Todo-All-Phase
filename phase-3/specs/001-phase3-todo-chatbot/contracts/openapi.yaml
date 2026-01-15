@@ -1,0 +1,402 @@
+openapi: 3.0.3
+info:
+  title: Todo AI Chatbot API
+  description: API for the Todo AI Chatbot application with natural language processing
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000/api
+    description: Local development server
+  - url: https://api.todo-chatbot.com
+    description: Production server
+
+paths:
+  /{user_id}/chat:
+    post:
+      summary: Send a message to the AI chatbot
+      description: Process user message through AI agent and return response
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          description: The ID of the authenticated user
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                conversation_id:
+                  type: integer
+                  description: Existing conversation ID (creates new if not provided)
+                  example: 123
+                message:
+                  type: string
+                  description: User's natural language message
+                  example: "Add a task to buy groceries"
+              required:
+                - message
+      responses:
+        '200':
+          description: Successful response from AI assistant
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  conversation_id:
+                    type: integer
+                    description: The conversation ID
+                    example: 123
+                  response:
+                    type: string
+                    description: AI assistant's response
+                    example: "I've added 'Buy groceries' to your task list"
+                  tool_calls:
+                    type: array
+                    description: List of MCP tools invoked
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: Name of the tool called
+                          example: "add_task"
+                        parameters:
+                          type: object
+                          description: Parameters passed to the tool
+                          example: {"user_id": "user123", "title": "Buy groceries"}
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+
+  /{user_id}/tasks:
+    get:
+      summary: Get all tasks for a user
+      description: Retrieve all tasks for the specified user with optional filtering
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          description: The ID of the authenticated user
+          schema:
+            type: string
+        - name: status
+          in: query
+          description: Filter tasks by status
+          schema:
+            type: string
+            enum: [all, pending, completed]
+            default: all
+        - name: sort
+          in: query
+          description: Sort order for tasks
+          schema:
+            type: string
+            enum: [created, title, due_date]
+            default: created
+      responses:
+        '200':
+          description: List of user's tasks
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    post:
+      summary: Create a new task
+      description: Create a new task for the specified user
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          description: The ID of the authenticated user
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: Title of the task
+                  example: "Buy groceries"
+                description:
+                  type: string
+                  description: Optional description of the task
+                  example: "Milk, eggs, bread"
+              required:
+                - title
+      responses:
+        '201':
+          description: Task created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+
+  /{user_id}/tasks/{id}:
+    get:
+      summary: Get a specific task
+      description: Retrieve a specific task by ID for the specified user
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          description: The ID of the authenticated user
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          description: The ID of the task
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Task details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      summary: Update a task
+      description: Update an existing task for the specified user
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          description: The ID of the authenticated user
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          description: The ID of the task
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: Updated title of the task
+                  example: "Buy groceries and fruits"
+                description:
+                  type: string
+                  description: Updated description of the task
+                  example: "Milk, eggs, bread, apples"
+      responses:
+        '200':
+          description: Task updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+    delete:
+      summary: Delete a task
+      description: Delete an existing task for the specified user
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          description: The ID of the authenticated user
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          description: The ID of the task
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Task deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Task deleted successfully"
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /{user_id}/tasks/{id}/complete:
+    patch:
+      summary: Toggle task completion status
+      description: Toggle the completion status of a task for the specified user
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          description: The ID of the authenticated user
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          description: The ID of the task
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Task completion status toggled successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+components:
+  schemas:
+    Task:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the task
+          example: 1
+        user_id:
+          type: string
+          description: ID of the user who owns the task
+          example: "user123"
+        title:
+          type: string
+          description: Title of the task
+          example: "Buy groceries"
+        description:
+          type: string
+          description: Optional description of the task
+          example: "Milk, eggs, bread"
+        completed:
+          type: boolean
+          description: Whether the task is completed
+          example: false
+        created_at:
+          type: string
+          format: date-time
+          description: When the task was created
+          example: "2026-01-12T10:00:00Z"
+        updated_at:
+          type: string
+          format: date-time
+          description: When the task was last updated
+          example: "2026-01-12T10:00:00Z"
+      required:
+        - id
+        - user_id
+        - title
+        - completed
+        - created_at
+        - updated_at
+
+  responses:
+    Unauthorized:
+      description: Missing or invalid authentication token
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              detail:
+                type: string
+                example: "Not authenticated"
+    Forbidden:
+      description: Access forbidden - attempting to access another user's data
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              detail:
+                type: string
+                example: "Access forbidden"
+    NotFound:
+      description: Requested resource not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              detail:
+                type: string
+                example: "Task not found"
+    ValidationError:
+      description: Request validation failed
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              detail:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    loc:
+                      type: array
+                      items:
+                        type: string
+                    msg:
+                      type: string
+                    type:
+                      type: string
+                example: [{"loc": ["body", "title"], "msg": "Field required", "type": "value_error"}]
+
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT token from Better Auth system
+
+security:
+  - BearerAuth: []
