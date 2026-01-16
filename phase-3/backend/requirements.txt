@@ -15,4 +15,4 @@ mcp
 fastmcp
 google-generativeai
 # Pin httpx for Starlette TestClient compatibility (Starlette 0.27 expects httpx<0.28)
-httpx<
+httpx
