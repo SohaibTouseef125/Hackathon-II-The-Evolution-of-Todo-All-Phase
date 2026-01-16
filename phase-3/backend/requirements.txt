@@ -5,8 +5,6 @@ SQLAlchemy
 alembic
 psycopg2-binary
 python-jose[cryptography]
-passlib
-bcrypt
 python-multipart
 python-dotenv
 pydantic
@@ -16,3 +14,5 @@ fastmcp
 google-generativeai
 # Pin httpx for Starlette TestClient compatibility (Starlette 0.27 expects httpx<0.28)
 httpx
+bcrypt==4.1.2
+passlib[bcrypt]==1.7.4
